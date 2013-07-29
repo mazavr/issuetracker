@@ -41,15 +41,16 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     commentable = find_commentable
-
+    attr = params[:comment]
     if commentable.is_a? Comment
-      @child = current_user.comments.create!(:body => params[:comment][:body], :commentable => commentable.commentable)
-      @child.move_to_child_of commentable
-      redirect_to story_path commentable.commentable
+      attr[:commentable] = commentable.commentable
+      @comment = current_user.comments.create!(attr)
+      @comment.move_to_child_of commentable
     else
-      @comment = current_user.comments.create!(:commentable => commentable, :body => params[:comment][:body])
-      redirect_to story_path commentable
+      attr[:commentable] = commentable
+      @comment = current_user.comments.create!(attr)
     end
+    redirect_to story_path @comment.commentable
   end
 
   # PUT /comments/1

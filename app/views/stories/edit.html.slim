@@ -9,6 +9,10 @@ h1 Editing story
         - @story.errors.full_messages.each do |message|
           li = message
   .control-group
+    = f.label :title, :class => 'control-label'
+    .controls
+      = f.text_field :title
+  .control-group
     = f.label :text, :class => 'control-label'
     .controls
       = f.text_field :text
@@ -20,15 +24,17 @@ h1 Editing story
     = f.label :state, :class => 'control-label'
     .controls
       = f.select :state, @story.state_transitions.map{|t| [t.to, t.to]}
-
   = f.fields_for :attachments do |attachment_form|
-    p
-      = attachment_form.label :description
-      = attachment_form.text_field :description
-    p
-      = attachment_form.label :file
-      = attachment_form.file_field :file
-    = attachment_form.link_to_remove 'Remove this attachment'
+    .control-group
+      p
+        = attachment_form.label :description
+        = attachment_form.text_field :description
+      p
+        = attachment_form.label :file
+        = attachment_form.file_field :file
+      = attachment_form.link_to_remove 'Remove this attachment'
+  p
+    = f.link_to_add 'Add attachment', :attachments
 
   = f.submit 'Save', :class => 'btn'
 

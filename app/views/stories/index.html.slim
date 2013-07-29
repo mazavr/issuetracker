@@ -1,11 +1,11 @@
 h1 Stories
 
-= search_form_for @search, :html => {:class => 'form-inline pull-right'} do |f|
+= search_form_for @search, html: {class: 'form-inline pull-right'} do |f|
   => f.label :state_eq, 'State:'
-  => f.select :state_eq, Story.state_machine.states.map {|t| [t.name, t.name]}, :include_blank => true
+  => f.select :state_eq, Story.state_machine.states.map {|t| [t.name, t.name]}, include_blank: true
   => f.label :user_id_eq, 'User:'
-  => f.select :user_id_eq, User.all.map {|u| [u.email, u.id]}, :include_blank => true
-  => f.submit 'Filter', :class => 'btn'
+  => f.select :user_id_eq, User.all.map {|u| [u.email, u.id]}, include_blank: true
+  => f.submit 'Filter', class: 'btn'
 
 table.table
   thead
@@ -17,7 +17,7 @@ table.table
   tbody
     - @stories.each do |story|
       tr class=(row_class_for_state(story.state))
-        td = story.text
+        td = story.title
         td = story.user.try(:email)
         td
           - if story.state == 'new'
@@ -26,9 +26,9 @@ table.table
             = story.state
         td
           .btn-group
-            = link_to 'Show', story, :class => 'btn'
-            = link_to 'Edit', edit_story_path(story), :class => 'btn'
-            = link_to 'Destroy', story, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger'
+            = link_to 'Show', story, class: 'btn'
+            = link_to 'Edit', edit_story_path(story), class: 'btn'
+            = link_to 'Destroy', story, confirm: 'Are you sure?', method: :delete, class: 'btn btn-danger'
 
 br
 

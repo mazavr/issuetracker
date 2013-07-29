@@ -1,5 +1,5 @@
 class Story < ActiveRecord::Base
-  attr_accessible :text, :user_id, :attachments_attributes, :state
+  attr_accessible :title, :text, :user_id, :attachments_attributes, :state
 
   belongs_to :user
 
@@ -8,6 +8,9 @@ class Story < ActiveRecord::Base
   has_many :attachments, :as => :attachable
 
   accepts_nested_attributes_for :attachments, :allow_destroy => true
+
+  validates_presence_of :user, :if => :state_requires_user?
+  validates_presence_of :title
 
   state_machine :initial => :new do
     event(:accept) do
@@ -24,7 +27,7 @@ class Story < ActiveRecord::Base
     end
   end
 
-  validates_presence_of :user, :if => :state_requires_user?
+  private
 
   def state_requires_user?
     [:accepted, :started, :finished].include? state_name

@@ -1,15 +1,28 @@
 .media
   .pull-left &nbsp;
-
   .media-body
     h4.media-heading
       => comment.user.email
       - if comment.user == current_user
-        = link_to 'X', comment, :confirm => 'Are you sure?', :method => :delete
+        = link_to 'X', comment, confirm: 'Are you sure?', :method => :delete
     div = comment.body
+    div
+      - for attachment in comment.attachments
+        = image_tag attachment.file_url
     p
-      = form_for [comment, Comment.new], :html => {:class => 'form-inline'} do |f|
+      = nested_form_for [comment, Comment.new], html: {class: 'form-inline', multipart: true} do |f|
         = f.text_field :body
-        button.btn type="submit" reply
+        p
+          = f.fields_for :attachments do |attachment_form|
+            p
+              = attachment_form.label :description
+              = attachment_form.text_field :description
+            p
+              = attachment_form.label :file
+              = attachment_form.file_field :file
+            = attachment_form.link_to_remove 'Remove this attachment'
+          = f.link_to_add 'Add attachment', :attachments
+        p
+          button.btn type="submit" reply
     - for child_comment in comment.children do
-      = render 'comments/comment_item', :comment => child_comment
+      = render 'comments/comment_item', comment: child_comment

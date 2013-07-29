@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130725112708) do
+ActiveRecord::Schema.define(:version => 20130729054941) do
 
   create_table "attachments", :force => true do |t|
     t.text    "description"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20130725112708) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "state"
+    t.string   "title"
   end
 
   add_index "stories", ["user_id"], :name => "index_stories_on_user_id"

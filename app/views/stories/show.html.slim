@@ -1,14 +1,14 @@
-p#notice = notice
-
 p
   = link_to 'Edit', edit_story_path(@story)
   '|
   = link_to 'Back', stories_path
 
-p
-  span.label = @story.user.email if @story.user
+- if @story.user
+  p
+    span.label = @story.user.email
 
-h3= @story.text
+h4 = @story.title
+p = @story.text
 
 p
   - for attachment in @story.attachments
@@ -16,14 +16,9 @@ p
 
 p Comments:
 
-/- for comment in @story.comment_threads.includes(:user) do
 - for comment in @story.root_comments.includes(:user) do
   = render 'comments/comment_item', :comment => comment
 
 p New comment:
 
-= form_for [@story, Comment.new], :html => {:class => 'form-horizontal'} do |f|
-  .control-group
-    = f.text_area :body, :rows => 3
-
-  .actions = f.submit 'Create comment'
+= render partial: 'comments/form',  locals: {attachable: @story}

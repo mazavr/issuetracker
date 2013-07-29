@@ -13,6 +13,10 @@ class Comment < ActiveRecord::Base
   # NOTE: Comments belong to a user
   belongs_to :user
 
+  has_many :attachments, :as => :attachable
+
+  accepts_nested_attributes_for :attachments, :allow_destroy => true
+
   # Helper class method that allows you to build a comment
   # by passing a commentable object, a user_id, and comment text
   # example in readme

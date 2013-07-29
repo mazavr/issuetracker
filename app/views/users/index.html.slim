@@ -1,18 +1,19 @@
-h1 Listing users
+h1 Users
 
 table.table
-  tr
-    th Email
-    th
-    th
-    th
-
-  - @users.each do |user|
+  thead
     tr
-      td = user.email
-      td = link_to 'Show', user
-      td = link_to 'Edit', edit_user_path(user)
-      td = link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
+      th Email
+      th
+  tbody
+    - @users.each do |user|
+      tr
+        td = user.email
+        td
+          .btn-group
+            = link_to 'Show', user, class: 'btn'
+            = link_to 'Edit', edit_user_path(user), class: 'btn'
+            = link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete, class: 'btn'
 
 br
 

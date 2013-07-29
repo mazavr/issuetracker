@@ -1,9 +1,16 @@
-= form_for @comment do |f|
-  - if @comment.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:"
-      ul
-        - @comment.errors.full_messages.each do |message|
-          li = message
+= nested_form_for [attachable, Comment.new], html: {class: 'form-horizontal', multipart: true} do |f|
+  .control-group
+    = f.text_area :body, rows: 3
+  .control-group
+    = f.fields_for :attachments do |attachment_form|
+      p
+        = attachment_form.label :description
+        = attachment_form.text_field :description
+      p
+        = attachment_form.label :file
+        = attachment_form.file_field :file
+      = attachment_form.link_to_remove 'Remove this attachment'
+    = f.link_to_add 'Add attachment', :attachments
 
-  .actions = f.submit 'Save'
+
+  .actions = f.submit 'Create comment'

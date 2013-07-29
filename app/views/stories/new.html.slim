@@ -8,6 +8,10 @@ h1 New story
         - @story.errors.full_messages.each do |message|
           li = message
   .control-group
+    = f.label :title, :class => 'control-label'
+    .controls
+      = f.text_field :title
+  .control-group
     = f.label :text, :class => 'control-label'
     .controls
       = f.text_field :text
