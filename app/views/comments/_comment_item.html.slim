@@ -1,0 +1,15 @@
+.media
+  .pull-left &nbsp;
+
+  .media-body
+    h4.media-heading
+      => comment.user.email
+      - if comment.user == current_user
+        = link_to 'X', comment, :confirm => 'Are you sure?', :method => :delete
+    div = comment.body
+    p
+      = form_for [comment, Comment.new], :html => {:class => 'form-inline'} do |f|
+        = f.text_field :body
+        button.btn type="submit" reply
+    - for child_comment in comment.children do
+      = render 'comments/comment_item', :comment => child_comment

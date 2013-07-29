@@ -1,0 +1,22 @@
+h1 New comment
+
+= form_for @comment, :html => {:class => 'form-horizontal'} do |f|
+  - if @comment.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:"
+      ul
+        - @comment.errors.full_messages.each do |message|
+          li = message
+
+  .control-group
+    = f.label :body, :class => 'control-label'
+    .controls
+      = f.text_field :body
+  .control-group
+    = f.label :commentable, :class => 'control-label'
+    .controls
+      = f.select :commentable, Story.all.map{|u| [u.text, u.id]}
+
+  .actions = f.submit 'Create'
+
+= link_to 'Back', comments_path

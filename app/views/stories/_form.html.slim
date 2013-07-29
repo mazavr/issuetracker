@@ -1,0 +1,16 @@
+= form_for @story, :html => {:class => 'form-horizontal'} do |f|
+  - if @story.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@story.errors.count, "error")} prohibited this story from being saved:"
+      ul
+        - @story.errors.full_messages.each do |message|
+          li = message
+  .control-group
+    = f.label :text, :class => 'control-label'
+    .controls
+      = f.text_field :text
+  /.control-group
+  /  = f.label :password_digest, :html => {:class => 'control-label'}
+  /  .controls
+  /    = f.text_field :password_digest
+  = f.submit 'Save', :class => 'btn'

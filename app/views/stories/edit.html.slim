@@ -1,0 +1,38 @@
+h1 Editing story
+
+= nested_form_for @story, :html => {:class => 'form-horizontal', :multipart => true} do |f|
+  = hidden_field_tag :redirect_location, story_path(@story)
+  - if @story.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@story.errors.count, "error")} prohibited this story from being saved:"
+      ul
+        - @story.errors.full_messages.each do |message|
+          li = message
+  .control-group
+    = f.label :text, :class => 'control-label'
+    .controls
+      = f.text_field :text
+  .control-group
+    = f.label :user, :class => 'control-label'
+    .controls
+      = f.select :user_id, User.all.map{|u| [u.email, u.id]}, :include_blank => true
+  .control-group
+    = f.label :state, :class => 'control-label'
+    .controls
+      = f.select :state, @story.state_transitions.map{|t| [t.to, t.to]}
+
+  = f.fields_for :attachments do |attachment_form|
+    p
+      = attachment_form.label :description
+      = attachment_form.text_field :description
+    p
+      = attachment_form.label :file
+      = attachment_form.file_field :file
+    = attachment_form.link_to_remove 'Remove this attachment'
+
+  = f.submit 'Save', :class => 'btn'
+
+= link_to 'Show', @story
+'|
+= link_to 'Back', stories_path
+

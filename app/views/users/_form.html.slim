@@ -1,0 +1,17 @@
+= form_for @user, :html => {:class => 'form-horizontal'} do |f|
+  - if @user.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@user.errors.count, 'error')} prohibited this user from being saved:"
+      ul
+        - @user.errors.full_messages.each do |message|
+          li = message
+
+  .control-group
+    = f.label :email, :html => {:class => 'control-label'}
+    .controls
+      = f.text_field :email
+  .control-group
+    = f.label :password_digest, :html => {:class => 'control-label'}
+    .controls
+      = f.text_field :password_digest
+  = f.submit 'Save', :html => {:class => 'btn'}
