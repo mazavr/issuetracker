@@ -16,9 +16,9 @@ p
 
 p Comments:
 
-- for comment in @story.root_comments.includes(:user) do
+- for comment in @story.root_comments.includes(:user, :attachments) do
   = render 'comments/comment_item', :comment => comment
 
 p New comment:
 
-= render partial: 'comments/form',  locals: {attachable: @story}
+= render 'comments/form', attachable: @story

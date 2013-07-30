@@ -14,22 +14,25 @@ class Story < ActiveRecord::Base
 
   state_machine :initial => :new do
     event(:accept) do
-      transition [:new, :rejected] => :accepted, :if => :user
+      transition [:new, :rejected] => :accepted
     end
     event(:reject) do
       transition [:new, :started] => :rejected
     end
     event(:finish) do
-      transition :started => :finished, :if => :user
+      transition :started => :finished
     end
     event(:start) do
-      transition :accepted => :started, :if => :user
+      transition :accepted => :started
+    end
+    state :started, :accepted, :finished do
+      validates_presence_of :user
     end
   end
 
   private
 
   def state_requires_user?
-    [:accepted, :started, :finished].include? state_name
+    [:started, :accepted, :finished].include? state_name
   end
 end
