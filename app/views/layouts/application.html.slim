@@ -46,11 +46,13 @@ html lang="en"
       .row-fluid
         .span3
           .well.sidebar-nav
-            ul.nav.nav-list
-              li.nav-header Sidebar
-              li= link_to 'Link 1', '/path1'
-              li= link_to 'Link 2', '/path2'
-              li= link_to 'Link 3', '/path3'
+            - if current_user
+              ul.nav.nav-list
+                li.nav-header Fast list
+                li= link_to 'My stories', stories_path('q[user_id_eq]' => current_user.id)
+                li= link_to 'New stories', stories_path('q[state_eq]' => 'new')
+                li.divider
+                li= link_to 'New story', new_story_path
         .span9
           = bootstrap_flash
           = yield

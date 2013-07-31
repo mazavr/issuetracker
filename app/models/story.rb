@@ -25,7 +25,7 @@ class Story < ActiveRecord::Base
     event(:start) do
       transition :accepted => :started
     end
-    state :started, :accepted, :finished do
+    state :started, :finished do
       validates_presence_of :user
     end
   end
@@ -33,6 +33,6 @@ class Story < ActiveRecord::Base
   private
 
   def state_requires_user?
-    [:started, :accepted, :finished].include? state_name
+    [:started, :finished].include? state_name
   end
 end

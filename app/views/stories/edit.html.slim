@@ -23,7 +23,7 @@ h1 Editing story
   .control-group
     = f.label :state, :class => 'control-label'
     .controls
-      = f.select :state, @story.state_transitions.map{|t| [t.to, t.to]}
+      = f.select :state, @story.state_transitions.map{|t| [t.to, t.to]}.concat([[@story.state, @story.state]])
   = f.fields_for :attachments do |attachment_form|
     .control-group
       p

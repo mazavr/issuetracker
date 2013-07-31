@@ -19,11 +19,7 @@ table.table
       tr class=(row_class_for_state(story.state))
         td = story.title
         td = story.user.try(:email)
-        td
-          - if story.state == 'new'
-            a.btn title="first tooltip" = story.state
-          - else
-            = story.state
+        td = story_state_actions(story)
         td
           .btn-group
             = link_to 'Show', story, class: 'btn'

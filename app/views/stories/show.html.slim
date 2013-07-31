@@ -3,12 +3,21 @@ p
   '|
   = link_to 'Back', stories_path
 
-- if @story.user
-  p
-    span.label = @story.user.email
+p
+  - if @story.user
+    span.label => @story.user.email
+  span = @story.state
 
 h4 = @story.title
 p = @story.text
+
+.btn-toolbar
+  .btn-group
+    button.btn Left
+    button.btn Middle
+    button.btn Right
+  .btn-group
+    button.btn Reject
 
 p
   - for attachment in @story.attachments
