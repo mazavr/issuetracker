@@ -24,10 +24,10 @@ table.table
           .btn-group
             = link_to 'Show', story, class: 'btn'
             = link_to 'Edit', edit_story_path(story), class: 'btn'
-            = link_to 'Destroy', story, confirm: 'Are you sure?', method: :delete, class: 'btn btn-danger'
+            = link_to 'Destroy', story, method: :delete, class: 'btn btn-danger'
 
 br
 
 = paginate @stories
 
-= link_to 'New Story', new_story_path
+= link_to 'New Story', new_story_path, class: 'btn btn-success'

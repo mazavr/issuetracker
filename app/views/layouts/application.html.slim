@@ -51,6 +51,7 @@ html lang="en"
                 li.nav-header Fast list
                 li= link_to 'My stories', stories_path('q[user_id_eq]' => current_user.id)
                 li= link_to 'New stories', stories_path('q[state_eq]' => 'new')
+                li= link_to 'Accepted stories', stories_path('q[state_eq]' => 'accepted')
                 li.divider
                 li= link_to 'New story', new_story_path
         .span9

@@ -16,7 +16,7 @@ h1 New story
     .controls
       = f.text_field :text
   .control-group
-    = f.label :user, :class => 'control-label'
+    = f.label :user_id, :class => 'control-label'
     .controls
       = f.select :user_id, User.all.map{|u| [u.email, u.id]}, :include_blank => true
   .control-group
