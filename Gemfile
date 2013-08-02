@@ -51,6 +51,8 @@ gem 'carrierwave'
 
 gem 'nested_form'
 
+gem 'simple-navigation'
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

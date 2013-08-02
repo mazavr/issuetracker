@@ -11,5 +11,5 @@
     ' No available actions
 
   = form_for story, :html => {:class => 'form-inline', method: :put} do |f|
-    = f.select :user_id, User.all.map{|u| [u.email, u.id]}, :include_blank => true
+    = f.select :user_id, User.all.map{|u| [u.email, u.id]}, :include_blank => !story.state_requires_user?
     = f.submit 'Assign', :class => 'btn'
