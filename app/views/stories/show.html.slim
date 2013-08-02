@@ -1,32 +1,28 @@
 p
-  = link_to 'Edit', edit_story_path(@story)
-  '|
-  = link_to 'Back', stories_path
-
-p
   - if @story.user
     span.label => @story.user.email
+  - else
+    span> Not Assigned
   span = @story.state
 
 h4 = @story.title
 p = @story.text
 
-.btn-toolbar
-  .btn-group
-    button.btn Left
-    button.btn Middle
-    button.btn Right
-  .btn-group
-    button.btn Reject
+= render 'story_actions', story: @story
 
 p
   - for attachment in @story.attachments
     = image_tag attachment.file_url
 
+p
+  = link_to 'Edit', edit_story_path(@story)
+  '|
+  = link_to 'Back', stories_path
+
 p Comments:
 
 - for comment in @story.root_comments.includes(:user, :attachments) do
-  = render 'comments/comment_item', :comment => comment
+  = render 'comments/comment_item', comment: comment
 
 p New comment:
 

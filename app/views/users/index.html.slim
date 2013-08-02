@@ -8,10 +8,9 @@ table.table
   tbody
     - @users.each do |user|
       tr
-        td = user.email
+        td = link_to user.email, user, class: 'btn btn-link'
         td
           .btn-group
-            = link_to 'Show', user, class: 'btn'
             = link_to 'Edit', edit_user_path(user), class: 'btn'
             = link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete, class: 'btn'
 
@@ -19,4 +18,4 @@ br
 
 = paginate @users
 
-= link_to 'New User', new_user_path
+= link_to '+ New User', new_user_path, class: 'btn btn-success'

@@ -1,0 +1,15 @@
+.well.well-small
+  - if story.state_transitions.any?
+    .btn-toolbar
+      .btn-group
+        - for transition in story.state_transitions
+          - if !story.user and Story.state_requires_user(transition.to)
+            = link_to transition.event, '#', class: 'btn disabled'
+          - else
+            = link_to transition.event, story_path(story, 'story[state]' => transition.to), method: :put, class: 'btn'
+  - else
+    ' No available actions
+
+  = form_for story, :html => {:class => 'form-inline', method: :put} do |f|
+    = f.select :user_id, User.all.map{|u| [u.email, u.id]}, :include_blank => true
+    = f.submit 'Assign', :class => 'btn'

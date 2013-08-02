@@ -30,9 +30,13 @@ class Story < ActiveRecord::Base
     end
   end
 
+  def self.state_requires_user(state)
+    [:started, :finished].include? state.to_sym
+  end
+
   private
 
   def state_requires_user?
-    [:started, :finished].include? state_name
+    self.class.state_requires_user state_name
   end
 end

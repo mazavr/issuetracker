@@ -9,11 +9,12 @@ describe Story do
   end
   it 'should not change state without user when required' do
     story = Story.create!(title: 'title', text: 'Test')
-    story.accept.should_not be_true
-    expect { story.accept! }.to raise_error
-    story.state.should eq('new')
-    story.user = User.new(email: '123')
-    story.accept.should be_true
+    story.accept!
+    story.start.should_not be_true
+    expect { story.start! }.to raise_error
     story.state.should eq('accepted')
+    story.user = User.new(email: '123')
+    story.start.should be_true
+    story.state.should eq('started')
   end
 end

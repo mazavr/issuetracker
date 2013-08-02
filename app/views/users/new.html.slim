@@ -16,11 +16,11 @@ h1 New user
   .control-group class=('error' if @user.errors[:password].present?)
     = f.label :password, :class => 'control-label'
     .controls
-      = f.text_field :password
+      = f.password_field :password
   .control-group
     = f.label :password_confirmation, :class => 'control-label'
     .controls
-      = f.text_field :password_confirmation
+      = f.password_field :password_confirmation
   = f.submit 'Save', :class => 'btn'
 
 = link_to 'Back', users_path

@@ -17,12 +17,11 @@ table.table
   tbody
     - @stories.each do |story|
       tr class=(row_class_for_state(story.state))
-        td = story.title
+        td = link_to truncate(story.title, length: 40), story, class: 'btn btn-link', title: story.title
         td = story.user.try(:email)
         td = story_state_actions(story)
         td
           .btn-group
-            = link_to 'Show', story, class: 'btn'
             = link_to 'Edit', edit_story_path(story), class: 'btn'
             = link_to 'Destroy', story, method: :delete, class: 'btn btn-danger'
 
@@ -30,4 +29,4 @@ br
 
 = paginate @stories
 
-= link_to 'New Story', new_story_path, class: 'btn btn-success'
+= link_to '+ New Story', new_story_path, class: 'btn btn-success'
