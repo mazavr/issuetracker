@@ -26,6 +26,10 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
+group :test do
+  gem 'spork', '~> 1.0rc'
+end
+
 gem 'bullet', :group => :development
 
 gem 'twitter-bootstrap-rails'

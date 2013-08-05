@@ -12,6 +12,7 @@
     p
       = nested_form_for [comment, Comment.new], html: {class: 'form-inline', multipart: true} do |f|
         = f.text_field :body
+        button.btn type="submit" reply
         p
           = f.fields_for :attachments do |attachment_form|
             p
@@ -22,7 +23,6 @@
               = attachment_form.file_field :file
             = attachment_form.link_to_remove 'Remove this attachment'
           = f.link_to_add 'Add attachment', :attachments
-        p
-          button.btn type="submit" reply
+
     - for child_comment in comment.children do
       = render 'comments/comment_item', comment: child_comment
