@@ -19,7 +19,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 
-
+  gem 'angularjs-rails'
 end
 
 group :development, :test do
@@ -56,6 +56,8 @@ gem 'carrierwave'
 gem 'nested_form'
 
 gem 'simple-navigation'
+
+gem 'rabl'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

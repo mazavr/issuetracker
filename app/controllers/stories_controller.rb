@@ -12,15 +12,14 @@ class StoriesController < ApplicationController
     end
   end
 
+  def index_ng
+    render :layout => 'application_ng'
+  end
+
   # GET /stories/1
   # GET /stories/1.json
   def show
     @story = Story.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @story }
-    end
   end
 
   # GET /stories/new
@@ -47,13 +46,16 @@ class StoriesController < ApplicationController
   # POST /stories
   # POST /stories.json
   def create
+    print 'Create'
     @story = Story.new(params[:story])
 
     respond_to do |format|
       if @story.save
+        print 'Create save'
         format.html { redirect_to @story, notice: 'Story was successfully created.' }
         format.json { render json: @story, status: :created, location: @story }
       else
+        print 'Create no tsave'
         format.html { render action: 'new' }
         format.json { render json: @story.errors, status: :unprocessable_entity }
       end
