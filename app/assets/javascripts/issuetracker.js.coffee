@@ -2,6 +2,14 @@ app = angular.module("IssueTracker", ["ngResource"])
 
 app.config(["$httpProvider", (provider) -> provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')])
 
+app.config ["$routeProvider", ($routeProvider) ->
+  $routeProvider.when '/',
+    {
+      templateUrl: '/tmpl/stories_index.html'
+      controller: 'StoriesCtrl'
+    }
+]
+
 app.factory "Entry", ["$resource", ($resource) ->
   $resource('/stories/:id', {id: "@id"}, {update: 'PUT'})
 ]

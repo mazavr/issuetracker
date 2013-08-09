@@ -5,11 +5,11 @@ class Story < ActiveRecord::Base
 
   acts_as_commentable
 
-  has_many :attachments, :as => :attachable, dependent: :destroy
+  has_many :attachments, as: :attachable, dependent: :destroy
 
-  accepts_nested_attributes_for :attachments, :allow_destroy => true
+  accepts_nested_attributes_for :attachments, allow_destroy: true
 
-  validates_presence_of :user, :if => :state_requires_user?
+  validates_presence_of :user, if: :state_requires_user?
   validates_presence_of :title
 
   state_machine :initial => :new do

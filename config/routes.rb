@@ -1,4 +1,6 @@
 IssueTracker::Application.routes.draw do
+  get "pages/index"
+
   get "sessions/new"
 
   get "sessions/create"
@@ -29,6 +31,8 @@ IssueTracker::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   match 'ng' => 'stories#index_ng', :as => :angular
+
+  match 'tmpl/:template_name' =>  'pages#index', template_name: :template_name
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
