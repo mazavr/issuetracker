@@ -6,12 +6,16 @@ app.factory "Entry", ["$resource", ($resource) ->
   $resource('/stories/:id', {id: "@id"}, {update: 'PUT'})
 ]
 
-@StoriesController = ["$scope", "Entry", ($scope, Entry) ->
+app.controller "StoriesCtrl", ["$scope", "Entry", ($scope, Entry) ->
   $scope.entries = Entry.query()
 
   $scope.addEntry = ->
-    entry = Entry.save($scope.newEntry)
-    $scope.entries.push entry
-    $scope.newEntry = {}
+    Entry.save($scope.newEntry, (entry, headers) ->
+      $scope.entries.push entry
+      $scope.newEntry = {}
+    )
+
+  $scope.removeEntry = (idx) ->
+    $scope.entries[idx].$delete -> $scope.entries.splice idx, 1
 ]
 

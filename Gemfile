@@ -60,7 +60,7 @@ gem 'simple-navigation'
 gem 'rabl'
 
 # To use Jbuilder templates for JSON
-# gem 'jbuilder'
+#gem 'jbuilder'
 
 # Use unicorn as the web server
 # gem 'unicorn'

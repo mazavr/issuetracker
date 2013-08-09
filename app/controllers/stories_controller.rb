@@ -5,11 +5,6 @@ class StoriesController < ApplicationController
   def index
     @search = Story.search(params[:q])
     @stories = @search.result.includes(:user).page params[:page]
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @stories }
-    end
   end
 
   def index_ng

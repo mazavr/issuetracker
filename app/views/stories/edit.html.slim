@@ -3,9 +3,10 @@ h1 Editing story
 = nested_form_for @story, :html => {:class => 'form-horizontal', :multipart => true} do |f|
   = hidden_field_tag :redirect_location, story_path(@story)
   - if @story.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@story.errors.count, "error")} prohibited this story from being saved:"
-      ul
+    .alert.alert-error.alert-block
+      button.close type='button' data-dismiss='alert' &times
+      h4 Error!
+      ul.unstyled
         - @story.errors.full_messages.each do |message|
           li = message
   .control-group

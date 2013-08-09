@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require angular
 //= require angular-resource
+//= require twitter/bootstrap
 //= require bootstrap
 //= require issuetracker
 

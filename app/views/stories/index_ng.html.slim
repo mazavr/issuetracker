@@ -1,10 +1,11 @@
 p app will go here {{1+1}}
 
-div ng-controller="StoriesController"
+div ng-controller="StoriesCtrl"
   form ng-submit="addEntry()"
     input type="text" ng-model="newEntry.title"
     input type="text" ng-model="newEntry.text"
     input type="submit" value="Add"
   ul
     li ng-repeat="entry in entries"
-      | {{entry.title}}
+      span> \#{{entry.id}} {{entry.title}}
+      a ng-click="removeEntry($index)" del

@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  # todo: remove unused actions and views
+
   # GET /comments
   # GET /comments.json
   def index

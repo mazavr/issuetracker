@@ -5,7 +5,7 @@ class Story < ActiveRecord::Base
 
   acts_as_commentable
 
-  has_many :attachments, :as => :attachable
+  has_many :attachments, :as => :attachable, dependent: :destroy
 
   accepts_nested_attributes_for :attachments, :allow_destroy => true
 
