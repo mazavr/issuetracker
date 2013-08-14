@@ -59,6 +59,8 @@ gem 'simple-navigation'
 
 gem 'rabl'
 
+#gem 'client_side_validations'
+
 # To use Jbuilder templates for JSON
 #gem 'jbuilder'
 

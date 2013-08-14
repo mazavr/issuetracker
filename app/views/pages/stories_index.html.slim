@@ -1,11 +1,29 @@
-p app will go here {{1+1}}
-
 div ng-controller="StoriesCtrl"
-  form ng-submit="addEntry()"
-    input type="text" ng-model="newEntry.title"
-    input type="text" ng-model="newEntry.text"
-    input type="submit" value="Add"
-  ul
-    li ng-repeat="entry in entries"
-      span> \#{{entry.id}} {{entry.title}}
-      a ng-click="removeEntry($index)" del
+  .well
+    h4 New story
+    form ng-submit="addEntry()" class="form-horizontal"
+      .control-group
+        label.control-label Title
+        .controls
+          input type="text" ng-model="newEntry.title"
+      .control-group
+        label.control-label Text
+        .controls
+          input type="text" ng-model="newEntry.text"
+      input.btn type="submit" value="+ Add story"
+
+  table.table
+    thead
+      tr
+        th #
+        th Title
+        th
+    tbody
+      tr ng-repeat="entry in entries"
+        td
+          | {{entry.id}}
+        td
+          | {{entry.title}}
+        td
+          .btn-group
+            a.btn.btn-danger ng-click="removeEntry($index)" Destroy
