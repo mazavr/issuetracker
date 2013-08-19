@@ -1,15 +1,15 @@
 .well
   h4 Edit story
-  form ng-submit="saveStory()" class="form-horizontal"
-    .control-group
+  form name="EditStoryForm" ng-submit="saveStory()" class="form-horizontal" novalidate=""
+    .control-group ng-class="{error: EditStoryForm.title.$error.required && EditStoryForm.title.$dirty}"
       label.control-label Title
       .controls
-        input type="text" ng-model="story.title"
+        input type="text" name="title" ng-model="story.title" required=""
     .control-group
       label.control-label Text
       .controls
         input type="text" ng-model="story.text"
-    a.btn href="#/" Cancel
-    input.btn< type="submit" value="Save"
+    a.btn> href="#/" Cancel
+    input.btn type="submit" value="Save" ng-disabled="EditStoryForm.$invalid"
 
 

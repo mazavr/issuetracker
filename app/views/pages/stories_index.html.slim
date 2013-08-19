@@ -1,21 +1,23 @@
 .well
   h4 New story
-  form ng-submit="addEntry()" class="form-horizontal"
-    .control-group
+  form name="StoryForm" ng-submit="addEntry()" class="form-horizontal" novalidate=""
+    .control-group ng-class="{error: StoryForm.title.$error.required && StoryForm.title.$dirty}"
       label.control-label Title
       .controls
-        input type="text" ng-model="newEntry.title"
+        input name="title" type="text" ng-model="newEntry.title" required=""
     .control-group
       label.control-label Text
       .controls
         input type="text" ng-model="newEntry.text"
-    input.btn type="submit" value="+ Add story"
+    input.btn type="submit" value="+ Add story" ng-disabled="StoryForm.$invalid"
 
 table.table
   thead
     tr
       th #
       th Title
+      th User
+      th State
       th
   tbody
     tr ng-repeat="entry in entries"
@@ -23,6 +25,10 @@ table.table
         | {{entry.id}}
       td
         | {{entry.title}}
+      td
+        | {{entry.user.email}}
+      td
+        state-action update="updateStory(story, attr, assignUser)" story="entry" user-id=""
       td
         .btn-group
           a.btn href="#/stories/{{entry.id}}/edit" Edit
