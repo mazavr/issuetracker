@@ -47,21 +47,30 @@ app.controller 'StoryEditCtrl', ['$scope', 'Entry', '$routeParams',  ($scope, En
     $scope.story.$update()
 ]
 
-#app.directive 'stateColor', ->
-#  {
-#    restrict: 'A'
-#    priority: 1
-#    scope:
-#      stateColor: '@'
-#    link: (scope, element, attrs) ->
-#      console.log attrs.stateColor
-#  }
+app.directive 'stateColor', ->
+  {
+    restrict: 'A'
+    link: (scope, element, attrs) ->
+      getClass = (state) ->
+        switch state
+          when 'new' then 'info'
+          when 'finished' then 'success'
+          when 'rejected' then 'error'
+          else 'warning'
+      scope.$watch(attrs.stateColor, (newValue, oldValue) ->
+        element.removeClass 'info success warning error'
+        element.addClass getClass newValue
+      )
+#
+#      switch scope.$eval
+#        when 'new' then cssClass = 'info'
+#        when 'rejected' then cssClass = 'success'
+#        else cssClass = 'warning'
+#      element.addClass cssClass
+  }
 #  (scope, element, attrs) ->
 #    console.log attrs.stateColor
-#    switch attrs.stateColor
-#      when 'new' then cssClass = 'info'
-#      when 'rejected' then cssClass = 'success'
-#      else cssClass = 'warning'
+#
 #    element.addClass cssClass
 #    console.log attrs.stateColor
 #    if attrs.stateColor == 'new'

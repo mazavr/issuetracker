@@ -20,7 +20,7 @@ table.table
       th State
       th
   tbody
-    tr ng-repeat="entry in entries"
+    tr ng-repeat="entry in entries" state-color="entry.state"
       td
         | {{entry.id}}
       td
