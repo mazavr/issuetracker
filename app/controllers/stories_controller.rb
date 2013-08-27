@@ -5,6 +5,7 @@ class StoriesController < ApplicationController
   def index
     @search = Story.search(params[:q])
     @stories = @search.result.includes(:user).page params[:page]
+    @paging = {pagecount: @stories.total_pages}
   end
 
   def index_ng
