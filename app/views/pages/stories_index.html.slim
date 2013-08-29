@@ -9,6 +9,14 @@
       label.control-label Text
       .controls
         input type="text" ng-model="newEntry.text"
+
+    .control-group
+      label.control-label User
+      .controls
+        select> ng-model="newEntry.user_id" ng-options="u.id as u.email for u in users"
+          option value=""
+
+
     input.btn type="submit" value="+ Add story" ng-disabled="StoryForm.$invalid"
 
 form name="SearchForm" ng-submit="searchEntry()" class="form-inline pull-right" novalidate=""
@@ -39,4 +47,4 @@ table.table
           a.btn href="#/stories/{{entry.id}}/edit" Edit
           a.btn.btn-danger ng-click="removeEntry($index)" Destroy
 
-paging pagecount="paging.pagecount"
+paging pagecount="paging.pagecount" pageclick="pageClick(page)"

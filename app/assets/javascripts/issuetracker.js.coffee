@@ -65,6 +65,15 @@ app.controller 'StoriesCtrl', ['$scope', 'Entry', '$rootScope', 'User', '$locati
     angular.extend story, attr
     story.$update()
 
+  $scope.pageClick = (page) ->
+    params = {page: page}
+    (params["q[#{k}]"] = v if v) for k, v of $scope.search
+
+    Entry.list(params, (data) ->
+      $scope.entries = data.stories
+      $scope.paging = data.paging
+    )
+
   $scope.filterStories = ->  # todo: use the address
     params = {}
     (params["q[#{k}]"] = v if v) for k, v of $scope.search
@@ -150,7 +159,17 @@ app.directive 'paging', ->
     replace: true
     scope:
       pagecount: '='
-    template: "<div class=\"pagination\"><ul><li ng-repeat=\"page in pages\"><a href=\"#\">{{$index + 1}}</a></li></ul></div>"
+      pageclick: '&'
+    template:
+      "
+      <div class=\"pagination\">
+        <ul>
+          <li ng-repeat=\"page in pages\">
+            <a ng-click=\"pageclick({page: $index + 1})\">{{$index + 1}}</a>
+          </li>
+        </ul>
+      </div>
+      "
     link: (scope) ->
       scope.$watch 'pagecount', (count) ->
         scope.pages = new Array count
