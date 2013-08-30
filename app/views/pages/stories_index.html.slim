@@ -1,25 +1,25 @@
 .well
   h4 New story
-  form name="StoryForm" ng-submit="addEntry()" class="form-horizontal" novalidate=""
+  form name="StoryForm" ng-submit="addStory()" class="form-horizontal" novalidate=""
     .control-group ng-class="{error: StoryForm.title.$error.required && StoryForm.title.$dirty}"
       label.control-label Title
       .controls
-        input name="title" type="text" ng-model="newEntry.title" required=""
+        input name="title" type="text" ng-model="newStory.title" required=""
     .control-group
       label.control-label Text
       .controls
-        input type="text" ng-model="newEntry.text"
+        input type="text" ng-model="newStory.text"
 
     .control-group
       label.control-label User
       .controls
-        select> ng-model="newEntry.user_id" ng-options="u.id as u.email for u in users"
+        select> ng-model="newStory.user_id" ng-options="u.id as u.email for u in users"
           option value=""
 
 
     input.btn type="submit" value="+ Add story" ng-disabled="StoryForm.$invalid"
 
-form name="SearchForm" ng-submit="searchEntry()" class="form-inline pull-right" novalidate=""
+form name="SearchForm" ng-submit="searchStory()" class="form-inline pull-right" novalidate=""
   => label_tag 'state_eq', 'State:'
   select> ng-model="search.state_eq" ng-options="s for s in states" ng-change="filterStories()"
     option value="" Any
@@ -35,16 +35,16 @@ table.table
       th State
       th Actions
   tbody
-    tr ng-repeat="entry in entries" state-color="entry.state"
+    tr ng-repeat="story in stories" state-color="story.state"
       td
-        | {{entry.title}}
+        | {{story.title}}
       td
-        | {{entry.user.email}}
+        | {{story.user.email}}
       td
-        state-action update="updateStory(story, attr, assignUser)" story="entry"
+        state-action update="updateStory(story, attr, assignUser)" story="story"
       td
         .btn-group
-          a.btn href="#/stories/{{entry.id}}/edit" Edit
-          a.btn.btn-danger ng-click="removeEntry($index)" Destroy
+          a.btn href="#/stories/{{story.id}}/edit" Edit
+          a.btn.btn-danger ng-click="removeStory($index)" Destroy
 
 paging pagecount="paging.pagecount" pageclick="pageClick(page)"

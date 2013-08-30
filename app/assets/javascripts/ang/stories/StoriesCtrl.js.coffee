@@ -1,14 +1,12 @@
-app.controller 'StoriesCtrl', ['$scope', 'Entry', '$rootScope', 'User', '$location', '$routeParams', '$route', ($scope, Entry, $rootScope, User, $location, $routeParams, $route) ->
+app.controller 'StoriesCtrl', ['$scope', 'Story', '$rootScope', 'User', '$location', '$routeParams', '$route', ($scope, Story, $rootScope, User, $location, $routeParams, $route) ->
 
 #  getFilterParams = ->
 #    params = {}
 #    (params["q[#{k}]"] = v if v) for k, v of $scope.search
 #    params
 
-#  alert 'asdf'
-#  console.log Entry.list()
-  Entry.list (data) ->
-    $scope.entries = data.stories
+  Story.list (data) ->
+    $scope.stories = data.stories
     $scope.paging = data.paging
 
   #  console.log $scope.users
@@ -16,29 +14,28 @@ app.controller 'StoriesCtrl', ['$scope', 'Entry', '$rootScope', 'User', '$locati
 
   $scope.states = ['new', 'accepted', 'started', 'finished', 'rejected']
 
-  $scope.addEntry = ->
-    entry = Entry.save($scope.newEntry) # don't wait for server response. May use callback instead.
-    $scope.entries.push entry
-    $scope.newEntry = {}
+  $scope.addStory = ->
+    story = Story.save($scope.newStory) # don't wait for server response. May use callback instead.
+    $scope.stories.push story
+    $scope.newStory = {}
 
-  $scope.removeEntry = (idx) ->
-    Entry.delete $scope.entries[idx]
-    $scope.entries.splice idx, 1
+  $scope.removeStory = (idx) ->
+    Story.delete $scope.stories[idx]
+    $scope.stories.splice idx, 1
 
   $scope.updateStory = (story, attr, assignUser) ->
     attr.user_id = $rootScope.user_id if assignUser
     angular.extend story, attr
 
-    Entry.update story, (q) ->
-      story = q # todo: we need to view new prop in grid
-      angular.extend story, {}
+    Story.update story, (q) ->
+      angular.extend story, q # todo: we need to view new prop in grid
 
   $scope.pageClick = (page) ->
     params = {page: page}
     (params["q[#{k}]"] = v if v) for k, v of $scope.search
 
-    Entry.list(params, (data) ->
-      $scope.entries = data.stories
+    Story.list(params, (data) ->
+      $scope.stories = data.stories
       $scope.paging = data.paging
     )
 
@@ -52,9 +49,9 @@ app.controller 'StoriesCtrl', ['$scope', 'Entry', '$rootScope', 'User', '$locati
 
     #    $route.reload();
 
-    #    $scope.entries = Entry.query(params)
-    Entry.list(params, (data) ->
-      $scope.entries = data.stories
+    #    $scope.stories = Story.query(params)
+    Story.list(params, (data) ->
+      $scope.stories = data.stories
       $scope.paging = data.paging
     )
 

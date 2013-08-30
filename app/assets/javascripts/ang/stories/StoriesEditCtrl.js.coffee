@@ -1,5 +1,5 @@
-app.controller 'StoryEditCtrl', ['$scope', 'Entry', '$routeParams',  ($scope, Entry, $routeParams) ->
-  $scope.story =  Entry.get({id : $routeParams.id})
+app.controller 'StoryEditCtrl', ['$scope', 'Story', '$routeParams',  ($scope, Story, $routeParams) ->
+  $scope.story =  Story.get({id : $routeParams.id})
 
   $scope.saveStory = ->
     $scope.story.$update()
