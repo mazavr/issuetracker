@@ -16,5 +16,10 @@
 //= require angular-resource
 //= require twitter/bootstrap
 //= require bootstrap
-//= require issuetracker
+
+//= require ang/app
+//= require_tree ./ang/common
+//= require_tree ./ang/stories
+//= require_tree ./ang/users
+
 
