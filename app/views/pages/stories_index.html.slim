@@ -2,18 +2,18 @@
   h4 New story
   form name="StoryForm" ng-submit="addStory()" class="form-horizontal" novalidate=""
     .control-group ng-class="{error: StoryForm.title.$error.required && StoryForm.title.$dirty}"
-      label.control-label Title
+      label.control-label for="title" Title
       .controls
-        input name="title" type="text" ng-model="newStory.title" required=""
+        input id="title" type="text" ng-model="newStory.title" required=""
     .control-group
-      label.control-label Text
+      label.control-label for="text" Text
       .controls
-        input type="text" ng-model="newStory.text"
+        input id="text" type="text" ng-model="newStory.text"
 
     .control-group
-      label.control-label User
+      label.control-label for="user" User
       .controls
-        select> ng-model="newStory.user_id" ng-options="u.id as u.email for u in users"
+        select> ng-model="newStory.user_id" ng-options="u.id as u.email for u in users" id="user"
           option value=""
 
 

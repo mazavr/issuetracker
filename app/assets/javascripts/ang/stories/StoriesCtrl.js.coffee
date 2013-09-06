@@ -1,4 +1,4 @@
-app.controller 'StoriesCtrl', ['$scope', 'Story', '$rootScope', 'User', '$location', '$routeParams', '$route', ($scope, Story, $rootScope, User, $location, $routeParams, $route) ->
+app.controller 'StoriesCtrl', ['$scope', 'Story', '$rootScope', 'User', '$location', '$routeParams', '$route', 'Notifications', ($scope, Story, $rootScope, User, $location, $routeParams, $route, Notifications) ->
 
 #  getFilterParams = ->
 #    params = {}
@@ -15,12 +15,14 @@ app.controller 'StoriesCtrl', ['$scope', 'Story', '$rootScope', 'User', '$locati
   $scope.states = ['new', 'accepted', 'started', 'finished', 'rejected']
 
   $scope.addStory = ->
-    story = Story.save($scope.newStory) # don't wait for server response. May use callback instead.
+    story = Story.save($scope.newStory, (st) ->
+      console.log st
+      angular.extend story, st)
     $scope.stories.push story
     $scope.newStory = {}
 
   $scope.removeStory = (idx) ->
-    Story.delete $scope.stories[idx]
+    Story.delete $scope.stories[idx], -> Notifications.show('Deleted')
     $scope.stories.splice idx, 1
 
   $scope.updateStory = (story, attr, assignUser) ->
