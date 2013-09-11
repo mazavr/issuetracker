@@ -30,7 +30,7 @@ app.controller 'StoriesCtrl', ['$scope', 'Story', '$rootScope', 'User', '$locati
     angular.extend story, attr
 
     Story.update story, (q) ->
-      angular.extend story, q # todo: we need to view new prop in grid
+      angular.extend story, q
 
   $scope.pageClick = (page) ->
     params = {page: page}
