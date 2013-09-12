@@ -32,11 +32,6 @@ class StoriesController < ApplicationController
   # GET /stories/1/edit
   def edit
     @story = Story.find(params[:id])
-    #print @story.state
-    #print @story.state_paths
-
-    #print Story.state_machines[:new]
-
   end
 
   # POST /stories

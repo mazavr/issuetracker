@@ -5,10 +5,14 @@ app.config(['$httpProvider', (provider) ->
             provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 
             httpStatusCodeInterceptorFactory = ($q) ->
-              onSuccess = (response) -> response
+              onSuccess = (response) ->
+#                msg = angular.injector(['IssueTracker']).get('Notifications');
+#                msg.show 'MSG'
+                response
 
               onError = (response) ->
-                # todo: show global error dialog
+                msg = angular.injector(['IssueTracker']).get('Notifications');
+                msg.show 'MSG'
                 $q.reject(response)
 
               (promise) -> promise.then onSuccess, onError

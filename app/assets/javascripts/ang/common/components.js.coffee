@@ -1,5 +1,6 @@
 app.factory 'Notifications', ->
   {
     show: (text, type) ->
-      console.log "#{type}: #{text}"
+      noty
+        text: text
   }

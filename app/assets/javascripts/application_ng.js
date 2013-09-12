@@ -17,6 +17,10 @@
 //= require twitter/bootstrap
 //= require bootstrap
 
+//=require libs/noty/jquery.noty
+//=require_tree ./libs/noty/layouts
+//=require libs/noty/themes/default
+
 //= require ang/app
 //= require_tree ./ang/common
 //= require_tree ./ang/stories
