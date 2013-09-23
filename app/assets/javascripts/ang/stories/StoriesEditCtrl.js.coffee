@@ -4,4 +4,8 @@ app.controller 'StoryEditCtrl', ['$scope', 'Story', '$routeParams', '$location',
   $scope.saveStory = ->
     $scope.story.$update()
     $location.path('/')
+
+  $scope.deleteImage = ->
+    alert 'deleted'
+
 ]

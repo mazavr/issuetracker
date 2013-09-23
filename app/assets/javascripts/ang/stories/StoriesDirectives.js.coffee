@@ -18,7 +18,7 @@ app.directive 'stateAction', ->
       update: '&'
       story: '='
 
-    template: (a, b) ->
+    template: (a, b) ->      # todo: use string? not func...
       "
             <div class=\"btn-group\" ng-show=\"story.state == 'new'\">
               <div class=\"btn dropdown-toggle btn-info\" data-toggle=\"dropdown\" href=\"#\">
@@ -48,4 +48,20 @@ app.directive 'stateAction', ->
               {{story.state}}
             </span>
             "
+  }
+
+app.directive 'imageList', ->
+  {
+    restrict: 'E'
+    replace: true
+    scope:
+      delete: '&'
+      images: '='
+    template:
+      "
+      <div ng-repeat=\"image in images\">
+        <img src=\"{{image.file.file.url}}\" ng-click=\"delete()\" />
+      </div>
+      "
+
   }
