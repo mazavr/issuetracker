@@ -75,6 +75,8 @@ gem 'rabl'
 
 gem 'rails_12factor', group: :production
 
+gem 'resque'
+
 gem 'pg', group: :production
 
 ruby '1.9.3'
